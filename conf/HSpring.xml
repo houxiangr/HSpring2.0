@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <!-- ioc测试 -->
+    <bean id="BeanA" class="Houxiang.ioc.test.BeanA">
+        <property name="property1" value="AAAAAA"></property>
+    </bean>
+    <bean id="BeanB" class="Houxiang.ioc.test.BeanB">
+        <property name="property1" value="BBBBBB"></property>
+        <property name="property1" value="BBBBBB2"></property>
+        <property name="propertyA" ref="BeanA"></property>
+    </bean>
+    <!--目标对象 -->
+    <bean id="targetBean" class="HSpring.aop.test.TargetBean" aspectname="aspect1"></bean>
+    <!--cglib目标对象 -->
+    <bean id="cglibtargetBean" class="HSpring.aop.test.CglibTargetBean" aspectname="aspect1"></bean>
+    <!-- 前置通知对象1 -->
+    <bean id="beforeAdvice" class="HSpring.aop.test.BeforeAdvice"></bean>
+    <!-- 前置通知对象2 -->
+    <bean id="beforeAdvice2" class="HSpring.aop.test.BeforeAdvice2"></bean>
+    <!-- 后置通知对象1 -->
+    <bean id="afterAdvice" class="HSpring.aop.test.AfterAdvice"></bean>
+    <!-- 后置通知对象2 -->
+    <bean id="afterAdvice2" class="HSpring.aop.test.AfterAdvice2"></bean>
+    <!-- 环绕通知对象1 -->
+    <bean id="aroundAdvice" class="HSpring.aop.test.AroundAdvice"></bean>
+    <!-- 环绕通知对象2 -->
+    <bean id="aroundAdvice2" class="HSpring.aop.test.AroundAdvice2"></bean>
+    <!-- 配置AOP切面 -->
+    <aspect id="aspect1" expression="show.*">
+        <before>
+            <method>beforeAdvice</method>
+            <method>beforeAdvice2</method>
+        </before>
+        <around>
+            <method>aroundAdvice</method>
+            <method>aroundAdvice2</method>
+        </around>
+        <after>
+            <method>afterAdvice</method>
+            <method>afterAdvice2</method>
+        </after>
+    </aspect>
+</beans>
